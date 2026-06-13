@@ -1,30 +1,15 @@
 {
   "name": "legal-defense-agent",
   "version": "1.0.0",
-  "description": "GitHub Copilot Agent – Algorithmic Legal Defense (@legal-defense). Screens code for license/IP compliance and auto-refactors flagged snippets in GitHub Chat.",
-  "main": "src/server.js",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node src/server.js",
-    "test": "node --test"
+    "dev": "node --watch src/server.js"
   },
-  "keywords": [
-    "github-copilot-agent",
-    "copilot-extension",
-    "license-compliance",
-    "ip-safety",
-    "hackathon"
-  ],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@copilot-extensions/preview-sdk": "*",
     "express": "*",
     "dotenv": "*"
-  },
-  "devDependencies": {
-    "nodemon": "*"
   },
   "engines": {
     "node": ">=20.0.0"
