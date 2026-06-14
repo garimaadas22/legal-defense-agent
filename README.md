@@ -1,4 +1,4 @@
-Legal Defense Agent
+Legal Defense Agent 🛡️
 A high-performance, API-first compliance scanning agent designed to ensure open-source projects remain legally secure. This agent is built to integrate seamlessly into CI/CD pipelines and developer workflows, providing automated license and compliance insights.
 
 🚀 Overview
@@ -19,6 +19,11 @@ Event Trigger: The agent is designed to receive webhooks from GitHub Copilot or 
 Processing: It processes incoming payloads to perform automated compliance checks.
 
 Security: The service utilizes express.raw to preserve request buffers, ensuring secure signature verification for GitHub webhooks.
+
+📊 Project Proof
+Live Deployment (Render Logs):
+
+API Testing (Postman):
 
 🌐 Live API Endpoint
 The service is live and operational. You can verify the agent's status via our health check endpoint:
@@ -41,3 +46,4 @@ Endpoint: /agent
 Headers: Content-Type: application/json
 
 Body: Provide the JSON payload representing the repository code scan.
+
