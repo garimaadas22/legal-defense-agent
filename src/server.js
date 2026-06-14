@@ -16,7 +16,6 @@ const PORT = process.env.PORT ?? 3000;
 // Raw body MUST be preserved for GitHub signature verification.
 // Do NOT use express.json() globally – it will consume the raw buffer.
 app.use(requestLogger);
-app.use(express.static('public'));
 app.use(
   express.raw({ type: ["application/json", "application/*+json"], limit: "1mb" })
 );
@@ -40,3 +39,4 @@ app.listen(PORT, () => {
 });
 
 export default app;
+
