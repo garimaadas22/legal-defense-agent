@@ -1,36 +1,43 @@
-# Legal Defense Agent 🛡️
+Legal Defense Agent
+A high-performance, API-first compliance scanning agent designed to ensure open-source projects remain legally secure. This agent is built to integrate seamlessly into CI/CD pipelines and developer workflows, providing automated license and compliance insights.
 
-An algorithmic GitHub Copilot Extension built for the Microsoft Agents League Hackathon (Creative Apps Track). It helps developers scan their source code for open-source license compliance risks directly inside their chat workflow.
+🚀 Overview
+The Legal Defense Agent acts as a headless service that monitors and analyzes codebases for legal compliance. By utilizing a robust Node.js and Express architecture, it provides an "always-on" endpoint for real-time security and license auditing.
 
-## 💡 The Problem & Idea
-Whenever we use open-source packages or copy snippets from the internet, we rarely check their legal licenses (like GPL, LGPL, or SSPL). Using a highly restrictive license in a commercial project can lead to massive legal risks and compliance issues. 
+🛠 Tech Stack
+Runtime: Node.js
 
-Checking these licenses manually is boring and interrupts the coding flow. So, I built the **Legal Defense Agent**—a virtual legal assistant that lives right inside your GitHub Copilot Chat. It parses your code snippets, references an internal compliance registry, and alerts you with visual risk flags before you commit!
+Framework: Express.js
 
-## 🧠 Architecture & How it Works
-The project is built fully on top of the official GitHub Copilot Extension framework and integrates directly with the GitHub Copilot LLM layer.
+Deployment: Render (Cloud PaaS)
 
-1. **Developer Interface:** The user interacts with the agent using `@legal-defense` inside the GitHub Chat interface to check specific code blocks.
-2. **Secure Webhook Layer:** The Express.js backend receives the payload safely. Requests are verified via cryptographic signatures (`verifySignature.js`) to ensure they originate genuinely from GitHub.
-3. **Core Intelligence Pipeline:** 
-   - `codeExtractor` parses and pulls out the code blocks from the incoming request.
-   - `licenseScanner` runs regex fingerprinting to detect restricted license patterns (GPL, LGPL, SSPL, etc.).
-   - `promptBuilder` takes these scan findings and injects them into an enriched system prompt.
-4. **Grounded License Database:** The agent references `licenseDatabase.js`, a local compliance store that categorizes licenses into risk levels (Red/Orange/Yellow/Green) and provides specific refactor hints without external third-party calls.
-5. **Streaming Output:** The server bundles everything and talks to `api.githubcopilot.com/chat/completions` (GPT-4o), sending token-by-token streaming responses (SSE) back to the GitHub Chat UI with clear violation details, refactored code, and an IP safety certificate.
+Architecture: API-First / Headless Service
 
-## 🛠️ Tech Stack & Structure
-- **Runtime:** Node.js (ES Modules, version >= 20)
-- **Framework:** Express.js (`@copilot-extensions/preview-sdk`)
-- **APIs:** GitHub Copilot Chat Completions API (GitHub Copilot IQ Layer)
+⚙️ How it Works
+Event Trigger: The agent is designed to receive webhooks from GitHub Copilot or other CI/CD triggers.
 
-- src/core/ -> Core processing (Copilot LLM integration, prompt building, scanner)
-- src/data/ -> Grounded knowledge base (License compliance registry)
-- src/handlers/ -> Webhook routes and chat request processing
-- src/middleware/ -> HMAC verification, request logging, and global error handling
-- src/utils/ -> Markdown fenced code block extraction logic
+Processing: It processes incoming payloads to perform automated compliance checks.
 
-## 🚀 Future Roadmap
-- Add real-time legal data syncing with enterprise registries.
-- Support automated pull request scanning (GitHub Actions integration) to auto-comment on risky dependency additions.
-- Expand support from JavaScript/TypeScript parsing to Python and Go.
+Security: The service utilizes express.raw to preserve request buffers, ensuring secure signature verification for GitHub webhooks.
+
+🌐 Live API Endpoint
+The service is live and operational. You can verify the agent's status via our health check endpoint:
+https://legal-defense-agent-la5f.onrender.com/health
+
+📡 Deployment Status
+Status: Operational
+
+Environment: Production
+
+Logs: The service is actively monitoring for webhook traffic and maintaining uptime.
+
+🧪 Testing the Agent
+Since this is a headless service, testing can be performed via standard API tools like Postman:
+
+Method: POST
+
+Endpoint: /agent
+
+Headers: Content-Type: application/json
+
+Body: Provide the JSON payload representing the repository code scan.
