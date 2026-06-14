@@ -5,7 +5,6 @@
 
 import "dotenv/config";
 import express from "express";
-const __dirname = dirname(fileURLToPath(import.meta.url));
 import { agentRouter } from "./handlers/agentRouter.js";
 import { requestLogger } from "./middleware/requestLogger.js";
 import { errorHandler } from "./middleware/errorHandler.js";
