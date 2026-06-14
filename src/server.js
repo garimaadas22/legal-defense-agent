@@ -5,8 +5,6 @@
 
 import "dotenv/config";
 import express from "express";
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import { agentRouter } from "./handlers/agentRouter.js";
 import { requestLogger } from "./middleware/requestLogger.js";
@@ -19,8 +17,7 @@ const PORT = process.env.PORT ?? 3000;
 // Raw body MUST be preserved for GitHub signature verification.
 // Do NOT use express.json() globally – it will consume the raw buffer.
 app.use(requestLogger);
-const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(join(__dirname, '../public')));
+app.use(express.static('public'));
 app.use(
   express.raw({ type: ["application/json", "application/*+json"], limit: "1mb" })
 );
